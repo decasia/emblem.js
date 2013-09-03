@@ -1484,6 +1484,7 @@ test "array", ->
 
 
 Handlebars.registerPartial('hbPartial', '<a href="/people/{{id}}">{{name}}</a>')
+Handlebars.registerPartial('hb.PoorlyNamedPartial$.foo', 'is colored {{color}}')
 
 test "calling handlebars partial", ->
   emblem =
@@ -1494,6 +1495,16 @@ test "calling handlebars partial", ->
   shouldCompileToString emblem, 
     { id: 666, name: "Death" }, 
     '<a href="/people/666">Death</a>Hello <a href="/people/666">Death</a>'
+
+test "calling handlebars partial with special characters in name", ->
+  emblem =
+  '''
+  > hb.PoorlyNamedPartial$.foo
+  p It #{> hb.PoorlyNamedPartial$.foo}
+  '''
+  shouldCompileToString emblem,
+    { color: "orange" },
+    'is colored orange<p>It is colored orange</p>'
 
 Emblem.registerPartial(Handlebars, 'emblemPartial', 'a href="/people/{{id}}" = name')
 Emblem.registerPartial(Handlebars, 'emblemPartialB', 'p Grr')

@@ -163,7 +163,7 @@ legacyPartialInvocation
 }
 
 legacyPartialName
-  = s:$[a-zA-Z0-9_$-/]+ { return new AST.PartialNameNode(new AST.StringNode(s)); }
+  = s:$[a-zA-Z0-9_$/.\-]+ { return new AST.PartialNameNode(new AST.StringNode(s)); }
 
 // Returns [MustacheNode] or [BlockNode]
 mustache 

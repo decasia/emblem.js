@@ -1305,6 +1305,8 @@ test("array", function() {
 
 Handlebars.registerPartial('hbPartial', '<a href="/people/{{id}}">{{name}}</a>');
 
+Handlebars.registerPartial('hb.PoorlyNamedPartial$.foo', 'is colored {{color}}');
+
 test("calling handlebars partial", function() {
   var emblem;
   emblem = '> hbPartial\n| Hello #{> hbPartial}';
@@ -1312,6 +1314,14 @@ test("calling handlebars partial", function() {
     id: 666,
     name: "Death"
   }, '<a href="/people/666">Death</a>Hello <a href="/people/666">Death</a>');
+});
+
+test("calling handlebars partial with special characters in name", function() {
+  var emblem;
+  emblem = '> hb.PoorlyNamedPartial$.foo\np It #{> hb.PoorlyNamedPartial$.foo}';
+  return shouldCompileToString(emblem, {
+    color: "orange"
+  }, 'is colored orange<p>It is colored orange</p>');
 });
 
 Emblem.registerPartial(Handlebars, 'emblemPartial', 'a href="/people/{{id}}" = name');

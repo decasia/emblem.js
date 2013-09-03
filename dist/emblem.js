@@ -249,8 +249,8 @@ Emblem.Parser = (function() {
         peg$c15 = function(n, params) { 
           return [new AST.PartialNode(n, params[0])]; 
         },
-        peg$c16 = /^[a-zA-Z0-9_$-\/]/,
-        peg$c17 = "[a-zA-Z0-9_$-\\/]",
+        peg$c16 = /^[a-zA-Z0-9_$?\/.\-]/,
+        peg$c17 = "[a-zA-Z0-9_$?\\/.\\-]",
         peg$c18 = function(s) { return new AST.PartialNameNode(new AST.StringNode(s)); },
         peg$c19 = function(m) { 
           return [m]; 
